@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-order-db
+spec:
+  selector:
+    matchLabels:
+      app: mongo-order-db
+  template:
+    metadata:
+      labels:
+        app: mongo-order-db
+    spec:
+      containers:
+        - name: mongo-order-db
+          image: mongo:7.0-jammy
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: MONGO_INITDB_DATABASE
+                  name: mongo-order-db-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-order-db
+spec:
+  selector:
+    app: mongo-order-db
+  type: ClusterIP
+  ports:
+    - port: 27017
+      targetPort: 27017
+      protocol: TCP
+#---
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: mongo-order-db-pv
+#spec:
+#  storageClassName: 'standard'
+#  accessModes:
+#    - ReadWriteOnce
+#  capacity:
+#    storage: 1Gi
+#  hostPath:
+#    path: /data/order-db
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: mongo-order-db-pvc
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-order-db-config
+data:
+  MONGO_INITDB_DATABASE: "orders"

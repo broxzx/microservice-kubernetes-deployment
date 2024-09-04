@@ -18,6 +18,7 @@
     <modules>
         <module>gateway-service</module>
         <module>order-service</module>
+        <module>inventory-service</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -80,7 +81,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>

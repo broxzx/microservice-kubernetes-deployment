@@ -10,10 +10,10 @@ spring:
       mvc:
         routes:
           - id: order-service
-            uri: http://order-service.default.svc.cluster.local
+            uri: http://order-service:8081
             predicates:
               - Path=/orders/**
           - id: inventory-service
-            uri: http://inventory-service.default.svc.cluster.local
+            uri: http://inventory-service:8082
             predicates:
               - Path=/inventory/**

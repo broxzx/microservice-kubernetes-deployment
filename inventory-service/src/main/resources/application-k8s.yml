@@ -7,4 +7,4 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://localhost:27011/inventory
+      uri: mongodb://mongo-inventory-db:27017/inventory
