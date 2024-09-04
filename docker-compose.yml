@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  mongodb-order-service-db:
+    container_name: mongodb-order-service-db
+    image: mongo:7.0-jammy
+    ports:
+      - "27012:27017"
+    environment:
+      MONGO_INITDB_DATABASE: orders
+  mongodb-inventory-service-db:
+    container_name: mongodb-inventory-service-db
+    image: mongo:7.0-jammy
+    ports:
+      - "27011:27017"
+    environment:
+      MONGO_INITDB_DATABASE: inventory
